@@ -6,49 +6,91 @@ public class main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String expression ="3444+x+3+5+8/x+2+8+7+8+7+8+8+98"; 
+		String expression ="3444+x+6/x+2+8"; 
 		boolean var =true; 
 		String caractere=""; 
 		String expressionFinal=""; 
 		String expressionAfter=""; 
+		ArrayList<String> suggestion =  new ArrayList<String>();
 		ArrayList<ArrayList<String>> listFinal= new ArrayList<ArrayList<String>>();
-		ArrayList<String> formule = new ArrayList<String>();
+		ArrayList<String> signeExpression = new ArrayList<String>();
+		ArrayList<String> formule2 = new ArrayList<String>();
+		int nombreDeSigne = compteSigne(expression); 
+		int tailleExpression=0; 
 		
 		int taille=0; 
+		while(tailleExpression!=nombreDeSigne) {
 		
-		while(var) {
-			caractere=expression.substring(taille,taille+1); 
-			if(caractere.equals("/")||caractere.equals("*")) {
-				
-				expressionAfter=fonctionParenthese2(expressionAfter,3); 
-				
-				formule.add(expressionAfter); 
-				formule.add(caractere); 
-				expressionAfter=""; 
-				
-				taille++;
-				
-			}else {
-				if(taille+1==expression.length()) {
-					caractere=expression.substring(taille,taille+1);
-					expressionAfter = expressionAfter + caractere; 
-					expressionAfter=fonctionParenthese2(expressionAfter,3); 
-					formule.add(expressionAfter); 
+			while(var) {
+				caractere=expression.substring(taille,taille+1); 
+				if(caractere.equals("/")||caractere.equals("*")) {
+					ArrayList<String> formule = new ArrayList<String>();
 					
-					var=false; 
+					int cpt3=compteSigne(expressionAfter);
+					String expressionBefore= expressionAfter; 
+					for(int k=0; k<cpt3+1; k++) {
+						expressionAfter=fonctionParenthese2(expressionBefore,k); 
+						
+						formule.add(expressionAfter); 
+						
+					}
+					/*for(int k=0; k<formule.size(); k++) {
+						 System.out.println(formule.get(k)); 
+					}*/
+					signeExpression.add(caractere); 
+					expressionAfter=""; 
+					//System.out.println(formule.size());
+					listFinal.add(formule); 
+					//System.out.println(listFinal.get(listFinal.size()-1).size());
 					
+					//
+					//System.out.println(listFinal.get(listFinal.size()-1).size());
+					tailleExpression = tailleExpression+cpt3;
+					taille++;
+					
+				}else {
+					if(taille+1==expression.length()) {
+						ArrayList<String> formule = new ArrayList<String>();
+						caractere=expression.substring(taille,taille+1);
+						expressionAfter = expressionAfter + caractere; 
+						String expressionBefore= expressionAfter; 
+						int cpt5 =compteSigne(expressionAfter);
+						
+						for(int k=0; k<cpt5+1; k++) {
+							expressionAfter=fonctionParenthese2(expressionBefore,k); 
+							formule.add(expressionAfter); 
+						}
+						/*for(int k=0; k<formule.size(); k++) {
+							 System.out.println(formule.get(k)); 
+						}*/
+						tailleExpression = tailleExpression+cpt5;
+						listFinal.add(formule);
+						
+						var=false; 
+						//formule.clear();
+						
+					}
+				expressionAfter = expressionAfter + caractere; 
+				taille++; 
 				}
-			expressionAfter = expressionAfter + caractere; 
-			taille++; 
+				//formule.clear();
+				
 			}
+			//System.out.println(listFinal.get(0).size());
+			//System.out.println(listFinal.get(1).size());
 			
-		}
+			
+			
 	
-		for(int i=0; i<formule.size();i++) {
-			expressionFinal= expressionFinal+formule.get(i); 
 		}
-		System.out.print(expressionFinal);
-
+		for(int i=0; i<listFinal.size();i++) {
+			for ( int j=0; j<listFinal.get(i).size(); j++) {
+				System.out.println(listFinal.get(i).get(j));
+				
+			}
+		}
+		
+		
 	}
 	
 	public static String fonctionParenthese(String expression) {
@@ -144,7 +186,7 @@ public class main {
 						 
 						
 						 expression2.add("("+cpt+")");
-						System.out.println(cpt+"je suis la2");
+						//System.out.println(cpt+"je suis la2");
 						 cpt=""; 
 						 expression2.add(caractere); 
 						 //compteur=0;
@@ -155,12 +197,12 @@ public class main {
 							
 						if((caractere.equals("+") ||caractere.equals("-"))) {
 						compteur ++; 
-						System.out.println(compteur);
+						//System.out.println(compteur);
 						}
 						//System.out.println(cpt);
 						cpt=cpt+caractere; 
-						System.out.println(cpt+"je suis la");	
-						System.out.println(compteur);	
+						//System.out.println(cpt+"je suis la");	
+						//System.out.println(compteur);	
 						
 					
 					}
@@ -204,5 +246,11 @@ public class main {
 		}
 		return cpt;
 	}
+	
+	public static ArrayList<String> combinaison( ArrayList<String> newlist){
+		return newlist; 
+	}
+	
+	
 
 }
