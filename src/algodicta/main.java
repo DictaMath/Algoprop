@@ -83,12 +83,18 @@ public class main {
 			
 	
 		}
-		for(int i=0; i<listFinal.size();i++) {
+		/*for(int i=0; i<listFinal.size();i++) {
 			for ( int j=0; j<listFinal.get(i).size(); j++) {
 				System.out.println(listFinal.get(i).get(j));
 				
 			}
+		}*/
+		suggestion= combinaison(listFinal, signeExpression); 
+		for ( int j=0; j<suggestion.size(); j++) {
+			System.out.println(suggestion.get(j));
+			
 		}
+		
 		
 		
 	}
@@ -247,8 +253,28 @@ public class main {
 		return cpt;
 	}
 	
-	public static ArrayList<String> combinaison( ArrayList<String> newlist){
-		return newlist; 
+	public static ArrayList<String> combinaison( ArrayList<ArrayList<String>> newlist, ArrayList<String> signe){
+		ArrayList<String> listfinal = new ArrayList<String>(); 
+		if(newlist.size()==1) {
+			for(int k=0; k<newlist.get(0).size(); k++) {
+				listfinal.add(newlist.get(0).get(k)); 
+			}
+		}else {
+			if(newlist.size()==2) {
+				for(int k=0; k<newlist.get(0).size(); k++) {
+					for(int n=0; n<newlist.get(1).size(); n++) {
+						listfinal.add(newlist.get(0).get(k)+""+signe.get(0)+newlist.get(1).get(n)); 
+							 
+					} 
+				}
+			}
+				
+			
+			
+		}
+			
+		
+		return listfinal; 
 	}
 	
 	
